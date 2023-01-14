@@ -1,0 +1,9 @@
+Creating Virtual Environment:
+	python3 -m venv venv
+	source venv/bin/activate
+
+Pip Commands:
+	pip freeze > requirements.txt
+
+Flask Development Server:
+	flask --app app --debug run
