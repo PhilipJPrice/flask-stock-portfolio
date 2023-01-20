@@ -7,3 +7,6 @@ Pip Commands:
 
 Flask Development Server:
 	flask --app app --debug run
+
+Tests with Pytest:
+        python -m pytest
