@@ -1,4 +1,4 @@
-from flask import Flask, escape, render_template, request, session, redirect, url_for
+from flask import Flask, escape, render_template, request, session, redirect, url_for, flash
 from pydantic import BaseModel, validator, ValidationError
 
 class StockModel(BaseModel):
@@ -27,7 +27,8 @@ def index():
 
 @app.route('/about', methods=['GET'])
 def about():
-	return render_template('about.html', company_name='TestDriven.io')
+        flash('Thanks for learning about this site!', 'info')
+        return render_template('about.html', company_name='TestDriven.io')
         #return render_template('about.html')
 
 @app.route('/stocks/', methods=['GET'])
@@ -57,7 +58,9 @@ def add_stock():
             session['stock_symbol'] = stock_data.stock_symbol
             session['number_of_shares'] = stock_data.number_of_shares
             session['purchase_price'] = stock_data.purchase_price
-            return redirect(url_for('list_stocks')) # NEW!!
+            flash(f"Added new stock ({stock_data.stock_symbol})!", 'success')
+
+            return redirect(url_for('list_stocks'))
 
         except ValidationError as e:
             print(e)
