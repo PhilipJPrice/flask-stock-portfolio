@@ -1,5 +1,8 @@
 from flask import Flask, escape, render_template, request, session, redirect, url_for, flash
 from pydantic import BaseModel, validator, ValidationError
+import logging
+from flask.logging import default_handler
+from logging.handlers import RotatingFileHandler
 
 class StockModel(BaseModel):
     """Class for parsing new stock data from a form."""
@@ -15,6 +18,19 @@ class StockModel(BaseModel):
 
 app = Flask(__name__)
 
+#Remove the default logger configured by Flask
+app.logger.removeHandler(default_handler)
+
+#Logging Configuration
+file_handler = RotatingFileHandler('flask-stock-portfolio.log', maxBytes=16384, backupCount=20)
+file_formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(filename)s:%(lineno)d]')
+file_handler.setFormatter(file_formatter)
+file_handler.setLevel(logging.INFO)
+app.logger.addHandler(file_handler)
+
+# Log that the Flask application is starting
+app.logger.info('Starting the Flask Stock Portfolio App...')
+
 app.secret_key = '\xf3\xf6\xf9fe\xe6cK\x1c\xf0u)\xe1\xf7\nM\x1b\xda\x89;r\\\xc5\xb1\xa6Q\x99*\x0e\x8b\x84!'
 
 @app.route('/hello/<message>')
@@ -22,8 +38,9 @@ def hello_message(message):
 	return f'<h1>Welcome {escape(message)}!</h1>'
 
 @app.route('/', methods=['GET'])
-def index(): 
-	return render_template('index.html')
+def index():
+        app.logger.info('Calling the index() function.')
+        return render_template('index.html')
 
 @app.route('/about', methods=['GET'])
 def about():
@@ -58,10 +75,11 @@ def add_stock():
             session['stock_symbol'] = stock_data.stock_symbol
             session['number_of_shares'] = stock_data.number_of_shares
             session['purchase_price'] = stock_data.purchase_price
+
             flash(f"Added new stock ({stock_data.stock_symbol})!", 'success')
+            app.logger.info(f"Added new stock ({request.form['stock_symbol']})!")
 
             return redirect(url_for('list_stocks'))
-
         except ValidationError as e:
             print(e)
 
