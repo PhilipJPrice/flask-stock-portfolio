@@ -5,44 +5,35 @@ Flask Stock Portfolio Tutorial - TestDriven.io
 Commands for Mac (terminal) or Unix (shell)
 -------------------------------------------
 
-To Run:
+## Flask Development Server
 
-   flask --app app --debug run
+flask --app app --debug run
 
-Virtual Environment:
-```
-    Create Virtual Environment:
-```
+## Virtual Environment
+    
+### Create Virtual Environment
 
-	python -m venv venv
+python -m venv venv
 
-```
-    Activate Virtual Environment:
-```
-	source venv/bin/activate
+### Activate Virtual Environment
 
-Pip Commands:
-```
-    To Save Dependencies in txt File:
-```
+source venv/bin/activate
 
-	pip freeze > requirements.txt
+## Pip Commands
 
-```
-    To Install Dependencies:
-```
+### To Save Dependencies in txt File
 
-        pip install -r requirements.txt
+pip freeze > requirements.txt
 
-Flask Development Server:
-	
-        flask --app app --debug run
+### To Install Dependencies
 
-Tests with Pytest:
+pip install -r requirements.txt
 
-        python -m pytest
+## Tests with Pytest
 
-Routes:
+python -m pytest
 
-        flask routes
+## Routes
+
+flask routes
 
