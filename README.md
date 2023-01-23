@@ -2,6 +2,27 @@
 Flask Stock Portfolio Tutorial - TestDriven.io
 
 -------------------------------------------
+Current File Structure
+-------------------------------------------
+
+--app.py (Application Factory)
+--config.py (Configuration for Application)
+--instance (Stores run-time data)
+--project (Project Folder)
+----static (CSS Files)
+----users (About Page HTML and Routing)
+----templates (Base.html)
+----stocks (Stocks HTML and Routing)
+----__init__.py
+----__pycache__
+--requirements.txt (Pip Libraries)
+--venv
+--tests (Unit and Functional Tests)
+--README.md
+--flask-stock-portfolio.log (old)
+--__pycache__
+
+-------------------------------------------
 Commands for Mac (terminal) or Unix (shell)
 -------------------------------------------
 
