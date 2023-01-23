@@ -12,16 +12,11 @@ Current File Structure
 --project (Project Folder)
 ----static (CSS Files)
 ----users (About Page HTML and Routing)
-----templates (Base.html)
+----templates (base.html)
 ----stocks (Stocks HTML and Routing)
-----__init__.py
-----__pycache__
 --requirements.txt (Pip Libraries)
 --venv
 --tests (Unit and Functional Tests)
---README.md
---flask-stock-portfolio.log (old)
---__pycache__
 ```
 
 -------------------------------------------
