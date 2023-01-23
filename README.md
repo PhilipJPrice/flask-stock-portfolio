@@ -50,3 +50,33 @@ python -m pytest
 ```
 flask routes
 ```
+
+## Secret Keys
+
+### Python 3.6 or higher
+
+```
+python
+```
+
+```
+import secrets
+```
+
+```
+print(secrets.token_bytes(32))
+```
+
+### Python earlier than 3.6
+
+```
+python
+```
+
+```
+import os
+```
+
+```
+print(os.urandom(32))
+```

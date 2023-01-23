@@ -20,3 +20,6 @@ Calling the index() function.
 2023-01-22 15:16:36,351 INFO: Starting the Flask Stock Portfolio App... [in app.py:22]
 2023-01-22 15:16:38,823 INFO: Calling the index() function. [in routes.py:7]
 2023-01-22 15:16:42,928 INFO: Calling the index() function. [in routes.py:7]
+2023-01-23 10:25:38,902 INFO: Starting the Flask Stock Portfolio App... [in app.py:22]
+2023-01-23 10:25:39,188 INFO: Starting the Flask Stock Portfolio App... [in app.py:22]
+2023-01-23 10:25:40,218 INFO: Calling the index() function. [in routes.py:7]
