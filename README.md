@@ -5,6 +5,7 @@ Flask Stock Portfolio Tutorial - TestDriven.io
 Current File Structure
 -------------------------------------------
 
+```
 --app.py (Application Factory)
 --config.py (Configuration for Application)
 --instance (Stores run-time data)
@@ -21,6 +22,7 @@ Current File Structure
 --README.md
 --flask-stock-portfolio.log (old)
 --__pycache__
+```
 
 -------------------------------------------
 Commands for Mac (terminal) or Unix (shell)
