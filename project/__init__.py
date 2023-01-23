@@ -14,10 +14,11 @@ def create_app():
 
     # Configure the Flask application
     config_type = os.getenv('CONFIG_TYPE', default='config.DevelopmentConfig')
-    app.config.from_objet(config_type)
+    app.config.from_object(config_type)
 
     register_blueprints(app)
     configure_logging(app)
+    register_app_callbacks(app)
     return app
 
 def register_blueprints(app):
@@ -45,3 +46,21 @@ def configure_logging(app):
 
     # Log that the Flask application is starting
     app.logger.info('Starting the Flask Stock Portfolio App...')
+
+def register_app_callbacks(app):
+    @app.before_request
+    def app_before_request():
+        app.logger.info('Calling before_request() for the Flask application...')
+
+    @app.after_request
+    def app_after_request(response):
+        app.logger.info('Calling after_request() for the Flask application...')
+        return response
+
+    @app.teardown_request
+    def app_teardown_request(error=None):
+        app.logger.info('Calling teardown_request() for the Flask application...')
+
+    @app.teardown_appcontext
+    def app_teardown_appcontext(error=None):
+        app.logger.info('Calling teardown_appcontext() for the Flask application...')
