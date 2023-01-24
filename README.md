@@ -230,7 +230,7 @@ quit()
 1. Delete SQLite database file (instance/app.db)
 2. Delete "__pycache__" folders in top-level and "project" directory
 3. Delete "migrations" directory
-4. Run Flask-Migrate Procedure
+4. Run "Create (Using Flask-Migrate)" Procedure
 ```
 
 ## Flask Shell
