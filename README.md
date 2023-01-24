@@ -92,6 +92,12 @@ python -m pytest --setup-show [tests/function, tests/unit, --cov=project]
 python -m pytest --cov=project
 ```
 
+### Database Tests
+
+```
+python -m pytest -v tests/unit/test_models.py
+```
+
 ## Routes
 
 ```
@@ -162,11 +168,11 @@ flask db migrate -m "add tableName table"
 flask db upgrade
 ```
 
-### Troubleshooting (In Development) and Steps Before Deployment
+### Troubleshooting and Steps Before Deployment
 
 ```
 1. Delete SQLite database file (instance/app.db)
-2. Delete "__pycache__" folders in top-level directory and "project" directory
+2. Delete "__pycache__" folders in top-level and "project" directory
 3. Delete "migrations" directory
-4. Run Flask-Migrate Procedure (flask db init, migrate, upgrade)
+4. Run Flask-Migrate Procedure
 ```
