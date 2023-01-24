@@ -8,12 +8,15 @@ Current File Structure
 ```
 --app.py (Application Factory)
 --config.py (Configuration for Application)
---instance (Stores run-time data)
+--instance (Stores run-time data, Database)
+--migrations (Database Migrations)
+----versions (Database Version Control)
 --project (Project Folder)
 ----static (CSS Files)
 ----users (About Page, 403 Page, Routing)
 ----templates (base.html, 404 Page, 405 Page)
 ----stocks (Stocks Page, Routing)
+----models.py (DB Tables)
 --requirements.txt (Pip Libraries)
 --venv
 --tests (Unit and Functional Tests)
@@ -127,6 +130,8 @@ print(os.urandom(32))
 
 ## Creating SQLite Database
 
+### Manually
+
 ```
 flask shell
 ```
@@ -141,4 +146,27 @@ database.create_all()
 
 ```
 quit()
+```
+
+### Using Flask-Migrate
+
+```
+flask db init
+```
+
+```
+flask db migrate -m "add tableName table"
+```
+
+```
+flask db upgrade
+```
+
+### Troubleshooting (In Development) and Steps Before Deployment
+
+```
+1. Delete SQLite database file (instance/app.db)
+2. Delete "__pycache__" folders in top-level directory and "project" directory
+3. Delete "migrations" directory
+4. Run Flask-Migrate Procedure (flask db init, migrate, upgrade)
 ```
