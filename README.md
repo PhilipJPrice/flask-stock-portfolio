@@ -59,8 +59,34 @@ pip install -r requirements.txt
 
 ## Tests with Pytest
 
+### All Tests
+
 ```
 python -m pytest
+```
+
+### Unit Tests
+
+```
+python -m pytest tests/unit
+```
+
+### Functional Tests
+
+```
+python -m pytest tests/functional
+```
+
+### Call Structure of Fixtures with Pytest
+
+```
+python -m pytest --setup-show [tests/function, tests/unit, --cov=project]
+```
+
+### Coverage (pytest-cov) Library
+
+```
+python -m pytest --cov=project
 ```
 
 ## Routes
