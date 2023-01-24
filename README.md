@@ -77,10 +77,10 @@ python -m pytest tests/unit
 python -m pytest tests/functional
 ```
 
-### Call Structure of Fixtures with Pytest
+### Call Structure of Fixtures
 
 ```
-python -m pytest --setup-show [tests/function, tests/unit, --cov=project]
+python -m pytest --setup-show
 ```
 
 ### Coverage (pytest-cov) Library
