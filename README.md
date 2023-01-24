@@ -134,6 +134,10 @@ print(app.url_map)
 print(app.blueprints)
 ```
 
+```
+quit()
+```
+
 ## Secret Keys
 
 ### Python 3.6 or higher
