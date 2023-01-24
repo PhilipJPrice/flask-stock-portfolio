@@ -124,3 +124,21 @@ import os
 ```
 print(os.urandom(32))
 ```
+
+## Creating SQLite Database
+
+```
+flask shell
+```
+
+```
+from project import database
+```
+
+```
+database.create_all()
+```
+
+```
+quit()
+```
