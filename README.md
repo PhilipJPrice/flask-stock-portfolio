@@ -10,7 +10,6 @@ Current File Structure
 --config.py (Configuration for Application)
 --instance (Stores run-time data)
 --project (Project Folder)
-----__init__.py (Application Factory, Logging, Callbacks, Error Page Functions)
 ----static (CSS Files)
 ----users (About Page, 403 Page, Routing)
 ----templates (base.html, 404 Page, 405 Page)
@@ -78,10 +77,10 @@ python -m pytest tests/unit
 python -m pytest tests/functional
 ```
 
-### Call Structure of Fixtures
+### Call Structure of Fixtures with Pytest
 
 ```
-python -m pytest --setup-show
+python -m pytest --setup-show [tests/function, tests/unit, --cov=project]
 ```
 
 ### Coverage (pytest-cov) Library
