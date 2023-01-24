@@ -8,7 +8,7 @@ Current File Structure
 ```
 --app.py (Application Factory)
 --config.py (Configuration for Application)
---instance (Stores run-time data, Database)
+--instance (Stores run-time data, database)
 --migrations (Database Migrations)
 ----versions (Database Version Control)
 --project (Project Folder)
@@ -38,24 +38,6 @@ flask --help
 
 ```
 flask --version
-```
-
-### Flask Shell
-
-```
-flask shell
-```
-
-### Print App Attributes in Flask Shell
-
-```
-print(dir(app))
-```
-
-### Quit Flask Shell
-
-```
-quit()
 ```
 
 ## Flask Development Server
@@ -245,6 +227,24 @@ quit()
 2. Delete "__pycache__" folders in top-level and "project" directory
 3. Delete "migrations" directory
 4. Run Flask-Migrate Procedure
+```
+
+## Flask Shell
+
+```
+flask shell
+```
+
+### Print App Attributes in Flask Shell
+
+```
+print(dir(app))
+```
+
+### Quit Flask Shell
+
+```
+quit()
 ```
 
 ## Flask CLI Commands
