@@ -16,11 +16,16 @@ def create_app():
     config_type = os.getenv('CONFIG_TYPE', default='config.DevelopmentConfig')
     app.config.from_object(config_type)
 
+    initialize_extensions(app)
     register_blueprints(app)
     configure_logging(app)
     register_app_callbacks(app)
     register_error_pages(app)
     return app
+
+##########################
+#### Helper Functions ####
+##########################
 
 def register_blueprints(app):
     # Import the blueprints
@@ -74,3 +79,28 @@ def register_error_pages(app):
     @app.errorhandler(405)
     def method_not_allowed(e):
         return render_template('405.html'), 405
+
+
+##################
+#### DATABASE ####
+##################
+
+from flask_sqlalchemy import SQLAlchemy
+
+#######################
+#### Configuration ####
+#######################
+
+# Create the instances of the Flask extensions in the global scope,
+# but without any arguments passed in. These instances are not
+# attached to the Flask application at this point.
+database = SQLAlchemy()
+
+###################################
+#### Database Helper Functions ####
+###################################
+
+def initialize_extensions(app):
+    # Since the application instance is now created, pass it to each Flask
+    # extension instance to bind it to the Flask application instance (app)
+    database.init_app(app)
