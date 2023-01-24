@@ -26,6 +26,38 @@ Current File Structure
 Commands for Mac (terminal) or Unix (shell)
 -------------------------------------------
 
+## Generic Flask Commands
+
+### Flask Help
+
+```
+flask --help
+```
+
+### Flask Version
+
+```
+flask --version
+```
+
+### Flask Shell
+
+```
+flask shell
+```
+
+### Print App Attributes in Flask Shell
+
+```
+print(dir(app))
+```
+
+### Quit Flask Shell
+
+```
+quit()
+```
+
 ## Flask Development Server
 
 ```
@@ -100,8 +132,24 @@ python -m pytest -v tests/unit/test_models.py
 
 ## Routes
 
+### Flask Routes Command
+
 ```
 flask routes
+```
+
+### Flask Shell - Routes and Blueprints
+
+```
+flask shell
+```
+
+```
+print(app.url_map)
+```
+
+```
+print(app.blueprints)
 ```
 
 ## Secret Keys
@@ -134,9 +182,9 @@ import os
 print(os.urandom(32))
 ```
 
-## Creating SQLite Database
+## SQLite Database
 
-### Manually
+### Create (Manually)
 
 ```
 flask shell
@@ -154,7 +202,7 @@ database.create_all()
 quit()
 ```
 
-### Using Flask-Migrate
+### Create (Using Flask-Migrate)
 
 ```
 flask db init
@@ -168,6 +216,28 @@ flask db migrate -m "add tableName table"
 flask db upgrade
 ```
 
+### Resetting Database
+
+```
+flask shell
+```
+
+```
+from project import database
+```
+
+```
+database.drop_all()
+```
+
+```
+database.create_all()
+```
+
+```
+quit()
+```
+
 ### Troubleshooting and Steps Before Deployment
 
 ```
@@ -175,4 +245,28 @@ flask db upgrade
 2. Delete "__pycache__" folders in top-level and "project" directory
 3. Delete "migrations" directory
 4. Run Flask-Migrate Procedure
+```
+
+## Flask CLI Commands
+
+```
+flask stocks --help
+```
+
+```
+flask stocks <command>
+```
+
+### Stocks Blueprint Commands
+
+```
+flask stocks create_default_set
+```
+
+```
+flask stocks create '<SYMB>' '<##>' '<$$.$$>'
+```
+
+```
+flask stocks create 'SBUX' '25' '123.45'
 ```
