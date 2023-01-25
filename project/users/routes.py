@@ -21,6 +21,12 @@ from flask import abort
 def admin():
     abort(403)
 
+from flask import escape
+
+@users_blueprint.route('/hello/<path:message>')
+def print_path(message):
+    return f'<h1>Path provided: {escape(message)}!</h1>'
+
 # -----------------
 # User Registration
 # -----------------

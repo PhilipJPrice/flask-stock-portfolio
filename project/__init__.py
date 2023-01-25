@@ -87,6 +87,7 @@ def register_error_pages(app):
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_wtf.csrf import CSRFProtect
 
 #######################
 #### Configuration ####
@@ -97,6 +98,7 @@ from flask_migrate import Migrate
 # attached to the Flask application at this point.
 database = SQLAlchemy()
 db_migration = Migrate()
+csrf_protection = CSRFProtect()
 
 ###################################
 #### Database Helper Functions ####
@@ -107,3 +109,6 @@ def initialize_extensions(app):
     # extension instance to bind it to the Flask application instance (app)
     database.init_app(app)
     db_migration.init_app(app, database)
+
+    # CSRF Initialization
+    csrf_protection.init_app(app)
