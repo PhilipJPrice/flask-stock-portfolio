@@ -13,7 +13,7 @@ Current File Structure
 ----versions (Database Version Control)
 --project (Project Folder)
 ----static (CSS Files)
-----users (About Page, 403 Page, Routing)
+----users (About Page, 403 Page, Routing, Registration)
 ----templates (base.html, 404 Page, 405 Page)
 ----stocks (Stocks Page, Routing)
 ----models.py (DB Tables)
