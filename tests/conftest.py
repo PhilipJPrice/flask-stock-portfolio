@@ -22,10 +22,19 @@ def test_client():
         with flask_app.app_context():
             database.drop_all()
 
+#################
+##### USERS #####
+#################
+from project.models import User
+
+@pytest.fixture(scope='module')
+def new_user():
+    user = User('patrick@email.com', 'FlaskIsAwesome123')
+    return user
+
 ####################
 ##### DATABASE #####
 ####################
-
 from project.models import Stock
 
 @pytest.fixture(scope='module')

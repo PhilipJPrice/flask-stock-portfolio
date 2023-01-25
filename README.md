@@ -26,7 +26,7 @@ Current File Structure
 Commands for Mac (terminal) or Unix (shell)
 -------------------------------------------
 
-## Generic Flask Commands
+## Flask Commands
 
 ### Flask Help
 
