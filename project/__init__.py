@@ -81,13 +81,14 @@ def register_error_pages(app):
         return render_template('405.html'), 405
 
 
-##################
-#### DATABASE ####
-##################
+###############################
+#### DATABASE, CSRF, LOGIN ####
+###############################
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect
+from flask_login import LoginManager
 
 #######################
 #### Configuration ####
@@ -99,6 +100,8 @@ from flask_wtf.csrf import CSRFProtect
 database = SQLAlchemy()
 db_migration = Migrate()
 csrf_protection = CSRFProtect()
+login = LoginManager()
+login.login_view = "users.login"
 
 ###################################
 #### Database Helper Functions ####
@@ -112,3 +115,12 @@ def initialize_extensions(app):
 
     # CSRF Initialization
     csrf_protection.init_app(app)
+
+    login.init_app(app)
+
+    # Flask-Login configuration
+    from project.models import User
+
+    @login.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
