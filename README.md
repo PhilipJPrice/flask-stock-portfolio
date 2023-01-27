@@ -274,3 +274,21 @@ flask stocks create '<SYMB>' '<##>' '<$$.$$>'
 ```
 flask stocks create 'SBUX' '25' '123.45'
 ```
+
+## Email Configuration
+
+### Test Function (tests/functional/test_users.py, test_valid_registration())
+
+```
+assert outbox[0].sender == 'email@email.com'
+```
+
+### Environment Variables
+
+```
+export MAIL_USERNAME=<insert_email_address_here>
+```
+
+```
+export MAIL_PASSWORD=<insert_password_here>
+```
