@@ -89,6 +89,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager
+from flask_mail import Mail
 
 #######################
 #### Configuration ####
@@ -102,6 +103,7 @@ db_migration = Migrate()
 csrf_protection = CSRFProtect()
 login = LoginManager()
 login.login_view = "users.login"
+mail = Mail()
 
 ###################################
 #### Database Helper Functions ####
@@ -124,3 +126,6 @@ def initialize_extensions(app):
     @login.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
+
+    # Mail
+    mail.init_app(app)

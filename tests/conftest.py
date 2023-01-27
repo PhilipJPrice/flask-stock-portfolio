@@ -7,6 +7,7 @@ from project import database
 def test_client():
     flask_app = create_app()
     flask_app.config.from_object('config.TestingConfig')
+    flask_app.extensions['mail'].suppress = True
 
     # Create a test client using the Flask application configured for testing
     with flask_app.test_client() as testing_client:
@@ -17,7 +18,7 @@ def test_client():
             # Create the database and the database table(s)
             database.create_all()
 
-        yield testing_client
+        yield testing_client # this is where testing happens
 
         with flask_app.app_context():
             database.drop_all()
