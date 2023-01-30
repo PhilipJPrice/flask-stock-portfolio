@@ -74,6 +74,9 @@ class User(database.Model):
     def is_password_correct(self, password_plaintext: str):
         return check_password_hash(self.password_hashed, password_plaintext)
 
+    def set_password(self, password_plaintext: str):
+        self.password_hashed = self._generate_password_hash(password_plaintext)
+
     @staticmethod
     def _generate_password_hash(password_plaintext):
         return generate_password_hash(password_plaintext)
