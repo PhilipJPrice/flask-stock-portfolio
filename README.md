@@ -292,3 +292,27 @@ export MAIL_USERNAME=<insert_email_address_here>
 ```
 export MAIL_PASSWORD=<insert_password_here>
 ```
+
+## Creating a Form
+
+```
+Create a new
+```
+
+```
+    1. Class that defines the form (projects/users/forms.py)
+```
+
+```
+    2. Route for displaying the form and processing the data from the form (projects/users/route.py)
+```
+
+```
+    3. Template for displaying the form (projects/users/templates/users/fileName.html)
+```
+
+## Login
+
+### Fresh Login (Flask-Login Package)
+
+[Flask-Login Docs](https://flask-login.readthedocs.io/en/latest/#fresh-logins)
