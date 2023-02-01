@@ -301,7 +301,13 @@ Create a new:
 
 ```
     1. Class that defines the form (projects/users/forms.py)
+```
+
+```
     2. Route for displaying the form and processing the data from the form (projects/users/route.py)
+```
+
+```
     3. Template for displaying the form (projects/users/templates/users/fileName.html)
 ```
 
