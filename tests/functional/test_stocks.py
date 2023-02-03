@@ -122,3 +122,74 @@ def test_get_stock_list_not_logged_in(test_client):
     assert response.status_code == 200
     assert b'List of Stocks' not in response.data
     assert b'Please log in to access this page.' in response.data
+
+# ---------
+# -- API --
+# ---------
+import requests
+
+class MockSuccessResponse(object):
+    def __init__(self, url):
+        self.status_code = 200
+        self.url = url
+        self.headers = {'blaa': '1234'}
+
+    def json(self):
+        return {
+            'Meta Data': {
+                "2. Symbol": "MSFT",
+                "3. Last Refreshed": "2023-02-02"
+            },
+            'Time Series (Daily)': {
+                "2023-02-02": {
+                    "4. close": "264.6000",
+            },
+            "2023-02-01": {
+                "4. close": "252.7500",
+            }
+        }
+    }
+
+def test_monkeypatch_get_success(monkeypatch):
+    """
+    GIVEN a Flask application and a monkeypatched version of requests.get()
+    WHEN the HTTP response is set to successful
+    THEN check the HTTP response
+    """
+    def mock_get(url):
+        return MockSuccessResponse(url)
+
+    url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo'
+    monkeypatch.setattr(requests, 'get', mock_get)
+    r = requests.get(url)
+    assert r.status_code == 200
+    assert r.url == url
+    assert 'MSFT' in r.json()['Meta Data']['2. Symbol']
+    assert '2023-02-02' in r.json()['Meta Data']['3. Last Refreshed']
+    assert '264.6000' in r.json()['Time Series (Daily)']['2023-02-02']['4. close']
+
+class MockFailedResponse(object):
+    def __init__(self, url):
+        self.status_code = 404
+        self.url = url
+        self.headers = {'blaa': '1234'}
+
+    def json(self):
+        return {'error': 'bad'}
+
+def test_monkeypatch_get_failure(monkeypatch):
+    """
+    GIVEN a Flask application and a monkeypatched version of requests.get()
+    WHEN the HTTP response is set to failed
+    THEN check the HTTP response
+    """
+    def mock_get(url):
+        return MockFailedResponse(url)
+
+    url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo'
+    monkeypatch.setattr(requests, 'get', mock_get)
+    r = requests.get(url)
+    print(r.json())
+    assert r.status_code == 404
+    assert r.url == url
+    assert 'bad' in r.json()['error']
