@@ -316,3 +316,11 @@ Create a new:
 ### Fresh Login (Flask-Login Package)
 
 [Flask-Login Docs](https://flask-login.readthedocs.io/en/latest/#fresh-logins)
+
+## Alpha Vantage
+
+### API Key
+
+```
+export ALPHA_VANTAGE_API_KEY=<insert_alpha_vantage_api_key_here>
+```
