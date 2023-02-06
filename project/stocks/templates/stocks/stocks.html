@@ -22,17 +22,19 @@
                 </tr>
             </thead>
 
-            <!-- Table Element (Row) -->
-            {% for stock in stocks %}
-                <tr>
-                    <td>{{ stock.stock_symbol }}</td>
-                    <td>{{ stock.number_of_shares }}</td>
-                    <td>${{ stock.purchase_price / 100 }}</td>
-                    <td>{{ stock.purchase_date.strftime("%Y-%m-%d") }}</td>
-                    <td>${{ stock.current_price / 100 }}</td>
-                    <td>${{ stock.position_value / 100 }}</td>
-                </tr>
-            {% endfor %}
+            <!-- Table Elements (Rows) -->
+            <tbody>
+                {% for stock in stocks %}
+                    <tr>
+                        <td><a href="{{ url_for('stocks.stocks_details', id=stock.id) }}">{{ stock.stock_symbol }}</a></td>
+                        <td>{{ stock.number_of_shares }}</td>
+                        <td>${{ stock.purchase_price / 100 }}</td>
+                        <td>{{ stock.purchase_date.strftime("%Y-%m-%d") }}</td>
+                        <td>${{ stock.current_price / 100 }}</td>
+                        <td>${{ stock.position_value / 100 }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
 
             <!-- Footer Row -->
             <tfoot>

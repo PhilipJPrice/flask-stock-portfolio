@@ -102,3 +102,35 @@ def test_get_stock_data_success_two_calls(new_stock, mock_requests_get_success_d
     assert new_stock.current_price == 13694 # $136.94 -> integer
     assert new_stock.current_price_date.date() == datetime.now().date()
     assert new_stock.position_value == (13694*16)
+
+from freezegun import freeze_time
+
+@freeze_time('2023-02-03')
+def test_get_weekly_stock_data_success(new_stock, mock_requests_get_success_weekly):
+    """
+    GIVEN a Flask application configured for testing and a monkeypatchedd version of requests.get()
+    WHEN the HTTP response is set to successful
+    THEN check the HTTP response
+    """
+    title, labels, values = new_stock.get_weekly_stock_data()
+    assert title == 'Weekly Prices (IBM)'
+    assert len(labels) == 4
+    assert labels[0].date() == datetime(2023, 1, 13).date()
+    assert labels[1].date() == datetime(2023, 1, 20).date()
+    assert labels[2].date() == datetime(2023, 1, 27).date()
+    assert len(values) == 4
+    assert values[0] == '145.8900'
+    assert values[1] == '141.2000'
+    assert values[2] == '134.3900'
+    assert datetime.now() == datetime(2023, 2, 3)
+
+def test_get_weekly_stock_data_failure(new_stock, mock_requests_get_failure):
+    """
+    GIVEN a Flask application configured for testing and a monkeypatched version of requests.get()
+    WHEN the HTTP response is set to failed
+    THEN check the HTTP response
+    """
+    title, labels, values = new_stock.get_weekly_stock_data()
+    assert title == 'Stock chart is unavailable.'
+    assert len(labels) == 0
+    assert len(values) == 0
