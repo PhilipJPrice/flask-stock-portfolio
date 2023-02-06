@@ -3,6 +3,7 @@ from logging.handlers import RotatingFileHandler
 import logging
 from flask.logging import default_handler
 import os
+import sqlalchemy as sa
 
 # ----------------------------
 # Application Factory Function
@@ -23,6 +24,16 @@ def create_app():
     register_error_pages(app)
     return app
 
+    engine = sa.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+    inspector = sa.inspect(engine)
+    if not inspector.has_table("users"):
+        with app.app_context():
+            db.drop_all()
+            db.create_all()
+            app.logger.info('Initialized the database!')
+    else:
+        app.logger.info('Database already contains the users table.')
+
 ##########################
 #### Helper Functions ####
 ##########################
@@ -39,19 +50,24 @@ def register_blueprints(app):
 
 def configure_logging(app):
     #Logging Configuration
-    file_handler = RotatingFileHandler('instance/flask-stock-portfolio.log', 
-                                        maxBytes=16384, 
-                                        backupCount=20)
-    file_formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(filename)s:%(lineno)d]')
-    file_handler.setFormatter(file_formatter)
-    file_handler.setLevel(logging.INFO)
-    app.logger.addHandler(file_handler)
+    if app.config['LOG_WITH_GUNICORN']:
+        gunicorn_error_logger = logging.getLogger('gunicorn.error')
+        app.logger.handlers.extend(gunicorn_error_logger.handlers)
+        app.logger.setLevel(logging.DEBUG)
+    else:
+        file_handler = RotatingFileHandler('instance/flask-stock-portfolio.log', 
+                                            maxBytes=16384, 
+                                            backupCount=20)
+        file_formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(filename)s:%(lineno)d]')
+        file_handler.setFormatter(file_formatter)
+        file_handler.setLevel(logging.INFO)
+        app.logger.addHandler(file_handler)
 
-    #Remove the default logger configured by Flask
-    app.logger.removeHandler(default_handler)
+        #Remove the default logger configured by Flask
+        app.logger.removeHandler(default_handler)
 
-    # Log that the Flask application is starting
-    app.logger.info('Starting the Flask Stock Portfolio App...')
+        # Log that the Flask application is starting
+        app.logger.info('Starting the Flask Stock Portfolio App...')
 
 def register_app_callbacks(app):
     @app.before_request
