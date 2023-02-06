@@ -125,3 +125,28 @@ def create(symbol, number_of_shares, purchase_price):
     stock = Stock(symbol, number_of_shares, purchase_price)
     database.session.add(stock)
     database.session.commit()
+
+@stocks_blueprint.route("/chartjs_demo1")
+def chartjs_demo1():
+    return render_template('stocks/chartjs_demo1.html')
+
+@stocks_blueprint.route("/chartjs_demo2")
+def chartjs_demo2():
+    title = 'Monthly Data'
+    labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August']
+    values = [10.3, 9.2, 8.7, 7.1, 6.0, 4.4, 7.6, 8.9]
+    return render_template('stocks/chartjs_demo2.html', values=values, labels=labels, title=title)
+
+@stocks_blueprint.route("/chartjs_demo3")
+def chartjs_demo3():
+    title = 'Daily Prices'
+    labels = [datetime(2023, 1, 10),
+              datetime(2023, 1, 11),
+              datetime(2023, 1, 12),
+              datetime(2023, 1, 13),
+              datetime(2023, 1, 14),
+              datetime(2023, 1, 17),
+              datetime(2023, 1, 18),
+              datetime(2023, 1, 19)]
+    values = [10.3, 9.2, 8.7, 7.1, 6.0, 4.4, 7.6, 8.9]
+    return render_template('stocks/chartjs_demo3.html', values=values, labels=labels, title=title)
